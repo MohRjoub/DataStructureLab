@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class myList<T extends Comparable<T>> implements Listable<T> {
 	T[] list;
 	int count;
-	ArrayList<T>arrayList;
+
 	public myList(int size) {
 		list =  (T[])new Comparable[size];
 	}
