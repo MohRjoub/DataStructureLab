@@ -1,10 +1,11 @@
 package application;
 
-
+import java.util.ArrayList;
 
 public class myList<T extends Comparable<T>> implements Listable<T> {
 	T[] list;
 	int count;
+	ArrayList<T>arrayList;
 	public myList(int size) {
 		list =  (T[])new Comparable[size];
 	}
@@ -26,32 +27,32 @@ public class myList<T extends Comparable<T>> implements Listable<T> {
 	@Override
 	public boolean delete(T data) {
 		int index = find(data);
-		if(index!=-1){
-		for (int i = index+1; i < count; i++) {
-			list[i-1]=list[i];
+		if (index != -1) {
+			for (int i = index + 1; i < count; i++) {
+				list[i - 1] = list[i];
+			}
 			count--;
 			return true;
-		}
 		}
 		return false;
 	}
 
 	@Override
 	public boolean delete(int index) {
-		if(index!=-1){
-			for (int i = index+1; i < count; i++) {
-				list[i-1]=list[i];
-				count--;
-				return true;
+		if (index != -1) {
+			for (int i = index + 1; i < count; i++) {
+				list[i - 1] = list[i];
 			}
-			}
-			return false;
+			count--;
+			return true;
+		}
+		return false;
 
 	}
 
 	@Override
 	public int find(T data) {
-		for (int i = 0; i < list.length; i++) {
+		for (int i = 0; i < count; i++) {
 			if(list[i].compareTo(data)==0)
 				return i;
 		}
