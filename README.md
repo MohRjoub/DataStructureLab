@@ -1,1 +1,1 @@
-# Lab 0 Solution
+# Data Structure Lab Solution
