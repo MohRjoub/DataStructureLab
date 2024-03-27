@@ -1,6 +1,5 @@
 package application3;
 
-import application2.Node;
 
 public class DoublyLinkedList<T extends Comparable<T>> {
 	private DNode<T> head;
