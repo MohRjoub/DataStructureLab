@@ -1,5 +1,7 @@
 package application2;
 
+import java.util.Arrays;
+
 public class LinkedList<T extends Comparable<T>> {
 	private Node<T> head;
 
@@ -60,7 +62,7 @@ public class LinkedList<T extends Comparable<T>> {
 		if (head != null) {
 			Node<T> current = head;
 			Node<T> prev = null;
-			for (; current != null && current.getData().compareTo(data) < 0; prev = current, current = current.getNext());
+			for (; current != null && current.getData().compareTo(data) != 0; prev = current, current = current.getNext());
 			if (prev == null) {
 				head = current.getNext();
 			} else if (current == null) {
@@ -107,5 +109,4 @@ public class LinkedList<T extends Comparable<T>> {
 	    curr.setNext(prev);
 	    return reverseRec(next, curr);
 	}
-
 }
