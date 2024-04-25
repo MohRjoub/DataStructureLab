@@ -1,0 +1,45 @@
+package application7;
+
+public class District implements Comparable<District> {
+	private BSTree<Location> locations = new BSTree<>();
+	private String districtName;
+
+
+	public District(String districtName) {
+		this.districtName = districtName;
+	}
+
+
+	public BSTree<Location> getLocations() {
+		return locations;
+	}
+
+
+	public void insertLocation(Location location) {
+		this.locations.insert(location);
+	}
+
+
+	public String getDistrictName() {
+		return districtName;
+	}
+
+
+	public void setDistrictName(String districtName) {
+		this.districtName = districtName;
+	}
+
+
+	@Override
+	public String toString() {
+		return "District Name=" + districtName +"\n";
+	}
+
+
+	@Override
+	public int compareTo(District o) {
+		return this.districtName.compareToIgnoreCase(o.getDistrictName());
+	}
+}
+
+
