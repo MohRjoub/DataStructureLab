@@ -14,6 +14,7 @@ import application4.Main4;
 import application5.Main5;
 import application6.Main6;
 import application7.Main7;
+import application8.Main8;
 
 
 public class Driver extends Application {
@@ -30,7 +31,8 @@ public class Driver extends Application {
 			Main5 main5 = new Main5();
 			Main6 main6 = new Main6();
 			Main7 main7 = new Main7(primaryStage);
-			root.getTabs().addAll(main0.lab0,main1.lab1,main2.lab2,main3.lab3,main4.lab4,main5.lab5,main6.lab6,main7.lab7);
+			Main8 main8 = new Main8();
+			root.getTabs().addAll(main0.lab0,main1.lab1,main2.lab2,main3.lab3,main4.lab4,main5.lab5,main6.lab6,main7.lab7,main8.lab8);
 			Scene scene = new Scene(root, 600, 500);
 			primaryStage.setScene(scene);
 			primaryStage.show();

@@ -133,15 +133,16 @@ public class BSTree<T extends Comparable<T>> {
 		return 1 + size(node.getLeft()) + size(node.getRight());
 	}
 
-	public TNode<T> delete(T data) {
-		TNode<T> current = root;
-		TNode<T> parent = root;
-		boolean isLeftChild = false;
+	public T delete(T value) {
 		if (isEmpty())
-			return null; // tree is empty
-		while (current != null && !current.getData().equals(data)) {
+			return null;
+		TNode<T> parent = root;
+		TNode<T> current = root;
+		boolean isLeftChild = false;
+
+		while (current != null && current.getData().compareTo(value) != 0) {
 			parent = current;
-			if (data.compareTo((T) current.getData()) < 0) {
+			if (value.compareTo(current.getData()) < 0) {
 				current = current.getLeft();
 				isLeftChild = true;
 			} else {
@@ -149,53 +150,52 @@ public class BSTree<T extends Comparable<T>> {
 				isLeftChild = false;
 			}
 		}
+
 		if (current == null)
-			return null; // node to be deleted not found
-		// case 1: node is a leaf
-		if (!current.hasLeft() && !current.hasRight()) {
-			if (current == root) // tree has one node
+			return null;
+
+		if (current.isLeaf()) { // is a leaf
+			if (current == root) {
 				root = null;
-			else {
+			} else {
 				if (isLeftChild)
 					parent.setLeft(null);
 				else
 					parent.setRight(null);
 			}
-		}
-		// Case 2 broken down further into 2 separate cases
-		else if (current.hasLeft()) { // current has left child only
+		} else if (current.hasLeft() && !current.hasRight()) { // is a node with one child
 			if (current == root) {
 				root = current.getLeft();
 			} else if (isLeftChild) {
 				parent.setLeft(current.getLeft());
 			} else {
-				parent.setRight(current.getRight());
+				parent.setRight(current.getLeft());
 			}
-		} else if (current.hasRight()) { // current has right child only
+		} else if (current.hasRight() && !current.hasLeft()) { // is a node with one child
 			if (current == root) {
 				root = current.getRight();
 			} else if (isLeftChild) {
 				parent.setLeft(current.getRight());
 			} else {
 				parent.setRight(current.getRight());
-				}
-		}
-		// case 3: node to be deleted has 2 children
-		else {
+			}
+		} else { // is a node with two children
 			TNode<T> successor = getSuccessor(current);
-			if (current == root)
+			if (current == root) {
 				root = successor;
-			else if (isLeftChild) {
+			} else if (isLeftChild) {
 				parent.setLeft(successor);
 			} else {
 				parent.setRight(successor);
 			}
+
 			successor.setLeft(current.getLeft());
 		}
-		return current;
+
+		return current.getData();
 	}
 
-	public boolean isEmpty() {
+	private boolean isEmpty() {
 		return root == null;
 	}
 
@@ -208,13 +208,14 @@ public class BSTree<T extends Comparable<T>> {
 			successor = current;
 			current = current.getLeft();
 		}
+
 		if (successor != node.getRight()) { // fix successor connections
 			parentOfSuccessor.setLeft(successor.getRight());
 			successor.setRight(node.getRight());
 		}
+
 		return successor;
 	}
-
 	@Override
 	public String toString() {
 	    return toString(root);

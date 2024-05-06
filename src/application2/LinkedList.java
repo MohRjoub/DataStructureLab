@@ -1,6 +1,5 @@
 package application2;
 
-import java.util.Arrays;
 
 public class LinkedList<T extends Comparable<T>> {
 	private Node<T> head;
